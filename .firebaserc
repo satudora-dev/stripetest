@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "r-r-f-todo",
+    "test": "whoareyou-dev"
+  }
+}
