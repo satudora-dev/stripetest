@@ -38,14 +38,13 @@ const setCurrentUser = (currentUserID,prime)  => {
 export const fetchCurrentUser = () => dispatch => {
   firebaseAuth().onAuthStateChanged(user=>{
     if(user){
-      // stripeCustomerRef.doc(user.uid).collection("prime").onSnapshot((snapshot) => {
-      //   let prime=[];
-      //   snapshot.docs.forEach((doc) => {
-      //     prime.push(doc.data());
-      //   })
-        // dispatch(setCurrentUser(user.uid, prime));
-      // });
-      dispatch(setCurrentUser(user.uid))
+      stripeCustomerRef.doc(user.uid).collection("prime").onSnapshot((snapshot) => {
+        let prime;
+        snapshot.docs.forEach((doc) => {
+          prime=doc.data();
+        })
+        dispatch(setCurrentUser(user.uid,prime));
+      }).catch(() => dispatch(setCurrentUser(user.uid,null)));
     }else{
       dispatch(setCurrentUser(null));
     }
@@ -54,7 +53,6 @@ export const fetchCurrentUser = () => dispatch => {
 
 export const addToken = (uid, token) => dispatch => {
   if(!uid || !token){
-    console.log(uid, token);
     return;
   }
   stripeCustomerRef.doc(uid).collection('/tokens').add({token:token});
@@ -70,8 +68,7 @@ export const setVisibilityFilter = filter => dispatch =>{
 
 export const generateOTBarcode = (cuid,prime) => dispatch => {
   const gen_time = new Date().getTime();
-  const status ="p" ;
-  console.log(prime)
+  const status = prime  ?  "p" : "f" ;
   JsBarcode('#barcode', cuid + '-' + status + '-' + gen_time);
   barcodeLogRef.doc(cuid).set({gen_time:gen_time});
 }
