@@ -4,7 +4,6 @@ import JsBarcode from 'jsbarcode';
 class Point extends React.Component {
   componentDidMount(){
     if(this.props.cuid){
-      console.log(this.props)
       this.props.generateOTBarcode(this.props.cuid, this.props.prime);
       window.setTimeout(() => document.getElementById("barcode").remove(), 30*60*1000);
     }
