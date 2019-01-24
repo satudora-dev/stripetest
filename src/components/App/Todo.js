@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const Todo = ({ onClick, completed, text, buyTodo }) => (
   <li
@@ -8,7 +9,7 @@ const Todo = ({ onClick, completed, text, buyTodo }) => (
     }}
   >
     {text}
-    <button onClick={buyTodo}>BUY</button>
+    <Button onClick={buyTodo}>BUY</Button>
   </li>
 )
 

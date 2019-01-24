@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addTodo } from '../../actions';
+import { addTodo } from '../../actions/todos';
 import AddTodo from '../../components/App/AddTodo';
 
 

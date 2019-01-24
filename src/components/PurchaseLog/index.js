@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Button from '@material-ui/core/Button';
 
 class PurchaseLog extends React.Component {
   componentDidMount(){
@@ -18,9 +19,9 @@ class PurchaseLog extends React.Component {
               "    Amount:" + charge.amount + "¥"+
               "    Description:" + charge.description
               }</p>
-              <button key={i} variant="contained" onClick={() => this.props.createRefund(this.props.cuid, charge.id)} >
+              <Button key={i} variant="contained" onClick={() => this.props.createRefund(this.props.cuid, charge.id)} >
                 Refund
-              </button>
+              </Button>
             </div>
           );
         }

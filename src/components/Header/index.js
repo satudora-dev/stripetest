@@ -1,21 +1,21 @@
 import React from 'react';
-
+import Button from '@material-ui/core/Button';
 
 const responsiveHeader = (cuid,history,signOut) => {
   if (cuid){
     return (
       <div>
-        <button onClick={() => history.push("/")}>ToDo</button>
-        <button onClick={() => history.push(`/mypage/${cuid}`)}>MyPage</button>
-        <button onClick={() => signOut()}>signOut</button>
+        <Button onClick={() => history.push("/")}>ToDo</Button>
+        <Button onClick={() => history.push(`/mypage/${cuid}`)}>MyPage</Button>
+        <Button onClick={() => signOut()}>signOut</Button>
       </div>
     )
   }else{
     return (
       <div>
-        <button onClick={() => history.push("/")}>ToDo</button>
-        <button onClick={() => history.push("/login")}>Login</button>
-        <button onClick={() => history.push("/signup")}>SignUp</button>
+        <Button onClick={() => history.push("/")}>ToDo</Button>
+        <Button onClick={() => history.push("/login")}>Login</Button>
+        <Button onClick={() => history.push("/signup")}>SignUp</Button>
       </div>
     )
   }

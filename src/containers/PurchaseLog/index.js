@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PurchaseLog from '../../components/PurchaseLog';
-import { fetchUserCharges, createRefund } from '../../actions'
+import { fetchUserCharges, createRefund } from '../../actions/charges'
 const mapStateToProps = state => ({
   cuid: state.auth.cuid,
   charges: state.charges
