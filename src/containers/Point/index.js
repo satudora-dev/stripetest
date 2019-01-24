@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   generateOTBarcode: (cuid,prime) => dispatch(generateOTBarcode(cuid,prime)),
-  createCharge: (cuid,amount) => dispatch(createCharge(cuid,amount)),
+  createCharge: (cuid,amount, description) => dispatch(createCharge(cuid,amount, description)),
   upgradePrime: (cuid) => dispatch(upgradePrime(cuid))
 })
 

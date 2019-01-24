@@ -14,7 +14,7 @@ class Point extends React.Component {
       <svg id="barcode"></svg>
       <p>This barcode will be invalid after 30 minites</p>
       <button onClick={() => this.props.upgradePrime(this.props.cuid)}>Be Prime</button>
-      <button onClick={() => this.props.createCharge(this.props.cuid,2000)}>Pay 2000$</button>
+      <button onClick={() => this.props.createCharge(this.props.cuid,2000, "Thanks!! ASAKO!")}>Pay 2000$</button>
     </div>
     )
   }

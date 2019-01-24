@@ -9,6 +9,7 @@ class Mypage extends React.Component {
     return (
       <div>
         <button onClick={() => this.props.history.push(`/mypage/${cuid}/point`)}>Point</button>
+        <button onClick={() => this.props.history.push(`/mypage/${cuid}/purchaselog`)}>Purchase Log</button>
         <button onClick={() => this.props.history.push(`/mypage/${cuid}/card`)}>Manage Card</button>
       </div>
     )

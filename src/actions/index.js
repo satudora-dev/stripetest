@@ -61,7 +61,7 @@ export const fetchCurrentUser = () => dispatch => {
           prime=doc.data();
         })
         dispatch(setCurrentUser(user.uid,prime));
-      }).catch(() => dispatch(setCurrentUser(user.uid,null)));
+      })
     }else{
       dispatch(setCurrentUser(null));
     }
@@ -107,10 +107,32 @@ export const fetchUserSources = cuid => dispatch => {
   })
 }
 
-export const createCharge = (cuid,amount) => dispatch => {
-  stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount});
+export const createCharge = (cuid,amount, description) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount, description: description});
 }
 
 export const upgradePrime = (cuid) => dispatch => {
   stripeCustomerRef.doc(cuid).collection("prime").add({status:"p"});
+}
+
+const fetchUserChargesSuccess = charges => {
+  return {
+    type: 'FETCH_CHARGE',
+    charges: charges
+  }
+}
+
+export const fetchUserCharges = (cuid) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("charges").onSnapshot((snapshot) => {
+    let charges=[];
+    snapshot.docs.forEach((doc) => {
+      const charge = doc.data();
+      charges.push(charge);
+    })
+    dispatch(fetchUserChargesSuccess(charges));
+  })
+}
+
+export const createRefund = (cuid, chargeId) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("refunds").add({chargeId:chargeId});
 }

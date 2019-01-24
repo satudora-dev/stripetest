@@ -2,7 +2,7 @@
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const stripe = require('stripe')(functions.config().stripe.key);
+const stripe = require('stripe')(functions.config().stripe.token);
 const currency = 'USD';
 admin.initializeApp(functions.config().firebase);
 
@@ -37,8 +37,9 @@ exports.createStripeCharge = functions.firestore
     const snapval = snapshot.data();
     const customer = snapval.customer_id;
     const amount = val.amount;
+    const discription = val.discription;
     const idempotencyKey = context.params.id;
-    const charge = {amount, currency, customer};
+    const charge = {amount, currency, customer, discription};
     if (val.source !== null) {
        charge.source = val.source;
     }
@@ -51,7 +52,6 @@ exports.createStripeCharge = functions.firestore
 exports.createStripeSubscription = functions.firestore
   .document('stripe_customers/{userId}/prime/{id}')
   .onCreate(async (snap, context) => {
-    const val = snap.data();
     const snapshot = await admin.firestore()
     .collection(`stripe_customers`)
     .doc(context.params.userId).get();
@@ -66,4 +66,24 @@ exports.createStripeSubscription = functions.firestore
       ]
     });
     return snap.ref.set(response, { merge: true });
+});
+exports.createStripeRefund = functions.firestore
+  .document('stripe_customers/{userId}/refunds/{id}')
+  .onCreate(async (snap, context) => {
+    const val = snap.data();
+    const chargeId = val.chargeId;
+    const snapshot = await admin.firestore()
+    .collection(`stripe_customers`)
+    .doc(context.params.userId).get();
+    const snapval = snapshot.data();
+    const customer = snapval.customer_id;
+    const response = await stripe.refunds.create({charge: chargeId});
+    await snap.ref.set(response, { merge: true });
+    const refunded_charge = await stripe.charges.retrieve(chargeId);
+    const chargeRef = admin.firestore().collection(`stripe_customers`).doc(context.params.userId).collection("charges")
+    return chargeRef.where("id", "==", chargeId).get().then( (querySnapshot) => {
+      querySnapshot.forEach((chargeDoc) => {
+        chargeRef.doc(chargeDoc.id).update(refunded_charge);
+      })
+    })
 });
