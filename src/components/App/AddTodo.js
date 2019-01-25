@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const AddTodo = ({addTodo}) => {
   let input;
@@ -15,7 +16,7 @@ const AddTodo = ({addTodo}) => {
         }}
       >
         <input onChange={e => {input = e.target.value}} />
-        <button type="submit">Add Todo</button>
+        <Button type="submit">Add Todo</Button>
       </form>
     </div>
   )

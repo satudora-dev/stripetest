@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Button from '@material-ui/core/Button';
 
 
 class Mypage extends React.Component {
@@ -8,8 +8,9 @@ class Mypage extends React.Component {
     const cuid = this.props.match.params.cuid;
     return (
       <div>
-        <button onClick={() => this.props.history.push(`/mypage/${cuid}/point`)}>Point</button>
-        <button onClick={() => this.props.history.push(`/mypage/${cuid}/card`)}>Manage Card</button>
+        <Button onClick={() => this.props.history.push(`/mypage/${cuid}/point`)}>Point</Button>
+        <Button onClick={() => this.props.history.push(`/mypage/${cuid}/purchaselog`)}>Purchase Log</Button>
+        <Button onClick={() => this.props.history.push(`/mypage/${cuid}/card`)}>Manage Card</Button>
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchTodos } from '../../actions';
+import { fetchTodos } from '../../actions/todos';
 import App from '../../components/App';
 
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchUserSources } from '../../actions';
+import { fetchUserSources } from '../../actions/sources';
 import Card from '../../components/Card';
 
 const mapStateToProps = state => ({

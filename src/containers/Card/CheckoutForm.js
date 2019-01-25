@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addToken } from '../../actions';
+import { addToken } from '../../actions/charges';
 import CheckoutForm from '../../components/Card/CheckoutForm';
 
 const mapStateToProps = state => ({

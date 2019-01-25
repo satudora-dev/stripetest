@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckoutForm from '../../containers/Card/CheckoutForm';
+import Button from '@material-ui/core/Button';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 
 class Card extends React.Component {
@@ -31,13 +32,13 @@ class Card extends React.Component {
               return (
                 <div>
                   <p>{card.brand + "    下4桁" + card.last4}</p>
-                  <button key={i} variant="contained" >
+                  <Button key={i} variant="contained" >
                     編集
-                  </button>
+                  </Button>
                 </div>
               );
             })}
-        <button onClick={() => this.setState({register: true})}>Register new card</button>
+        <Button onClick={() => this.setState({register: true})}>Register new card</Button>
       </div>
     )
   }

@@ -1,11 +1,14 @@
 import React from 'react'
 import JsBarcode from 'jsbarcode';
+import Button from '@material-ui/core/Button';
 
 class Point extends React.Component {
   componentDidMount(){
     if(this.props.cuid){
-      this.props.generateOTBarcode(this.props.cuid, this.props.prime);
-      window.setTimeout(() => document.getElementById("barcode").remove(), 30*60*1000);
+      this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
+      window.setTimeout(() => {
+        this.props.eraseBarcode();
+      }, 30*60*1000)
     }
   }
   render(){
@@ -13,8 +16,8 @@ class Point extends React.Component {
     <div>
       <svg id="barcode"></svg>
       <p>This barcode will be invalid after 30 minites</p>
-      <button onClick={() => this.props.upgradePrime(this.props.cuid)}>Be Prime</button>
-      <button onClick={() => this.props.createCharge(this.props.cuid,2000)}>Pay 2000$</button>
+      <Button onClick={() => this.props.upgradePrime(this.props.cuid)}>Be Prime</Button>
+      <Button onClick={() => this.props.createCharge(this.props.cuid,2000, "Thanks!! ASAKO!")}>Pay 2000¥ to ASAKO</Button>
     </div>
     )
   }

@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const Link = ({ active, children, onClick }) => (
-  <button
+  <Button color="primary"
     onClick={onClick}
     disabled={active}
     style={{
@@ -9,6 +10,6 @@ const Link = ({ active, children, onClick }) => (
     }}
   >
     {children}
-  </button>
+  </Button>
 )
 export default Link

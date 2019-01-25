@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Mypage from './components/Mypage';
 import Card from './containers/Card';
 import Point from './containers/Point';
+import PurchaseLog from './containers/PurchaseLog';
 
 import {BrowserRouter,Route} from 'react-router-dom';
 import { Provider } from 'react-redux'
@@ -28,6 +29,7 @@ ReactDOM.render(
         <Route exact path="/mypage/:cuid" component={ Mypage } />
         <Route exact path="/mypage/:cuid/card" component={ Card } />
         <Route exact path="/mypage/:cuid/point" component={ Point } />
+        <Route exact path="/mypage/:cuid/purchaselog" component={ PurchaseLog } />
       </div>
     </BrowserRouter>
   </Provider>,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { firebaseAuth } from '../../firebase';
+import Button from '@material-ui/core/Button';
 
 
 firebaseAuth().useDeviceLanguage();
@@ -25,7 +26,7 @@ class Login extends React.Component {
   }
 
   componentDidMount = () => {
-    this.setState({recaptchaVerifier: new firebaseAuth.RecaptchaVerifier('sign-in-button', {
+    this.setState({recaptchaVerifier: new firebaseAuth.RecaptchaVerifier('sign-in-Button', {
       'size': 'invisible',
       'callback': (response)  => {
         this.onSignInSubmit();
@@ -64,9 +65,9 @@ class Login extends React.Component {
           <div>
             <p>Enter Your Phone Number to confirm via SMS  ex.080XXXXXXXX</p>
             <input className={'phone-number'} id={'phone-number'} onChange={e => this.setState({phoneNumber:e.target.value})} />
-            <button id={'sign-in-button'} onClick={() => {
+            <Button id={'sign-in-Button'} onClick={() => {
               this.onSignInSubmit();
-            }}>Signin</button>
+            }}>Signin</Button>
           </div>
           )
         }else{
@@ -74,12 +75,12 @@ class Login extends React.Component {
             <div>
               <p>Enter Confirmation 6-digits code   ex.999999</p>
               <input className={'code'} id={'code'} onChange={e => this.setState({code:e.target.value})} />
-              <button onClick={() => this.confirmCode()}>code</button>
+              <Button onClick={() => this.confirmCode()}>code</Button>
             </div>
           )
         }})()}
         <div>
-          <button onClick={() => console.log(this.state.phoneNumber)}>Phone confirmation</button>
+          <Button onClick={() => console.log(this.state.phoneNumber)}>Phone confirmation</Button>
         </div>
 
       </div>

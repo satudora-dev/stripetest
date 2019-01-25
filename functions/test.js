@@ -1,9 +1,11 @@
 var stripe = require("stripe")("sk_test_9aXfMKxJRLeAlFKg7epTGby4");
 
-stripe.customers.create({description: "user.uid"},function(err, subscription) {
-    console.log(err)
-    console.log(subscription)
-  })
+// stripe.customers.create({description: "user.uid"},function(err, subscription) {
+//     console.log(err)
+//     console.log(subscription)
+//   })
+
+;
 
 //
 // console.log(stripe.products.create({
@@ -25,17 +27,3 @@ stripe.customers.create({description: "user.uid"},function(err, subscription) {
 //     console.log(err)
 //     console.log(subscription)
 // });
-
-
-stripe.subscriptions.create({
-  customer: "cus_ELPyhqmgkR21Xa",
-  items: [
-    {
-      plan: "plan_EJvVXXyL9vr2f9",
-    },
-  ]
-}, function(err, subscription) {
-    console.log(err)
-    console.log(subscription)
-  }
-);
