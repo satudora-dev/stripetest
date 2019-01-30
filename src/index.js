@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './containers/Header';
-import App from './containers/App';
+import App from './components/App';
 import Login from './components/Login';
-import Signup from './components/Signup';
 import Mypage from './components/Mypage';
 import Card from './containers/Card';
 import Point from './containers/Point';
@@ -25,7 +24,6 @@ ReactDOM.render(
         <Route path="/" component={ Header } />
         <Route exact path="/" component={ App } />
         <Route exact path="/login" component={ Login } />
-        <Route exact path="/signup" component={ Signup } />
         <Route exact path="/mypage/:cuid" component={ Mypage } />
         <Route exact path="/mypage/:cuid/card" component={ Card } />
         <Route exact path="/mypage/:cuid/point" component={ Point } />

@@ -1,20 +1,10 @@
-import React from 'react'
-import AddTodo from '../../containers/App/AddTodo'
-import VisibleTodoList from '../../containers/App/VisibleTodoList'
-import Footer from './Footer'
+import React from 'react';
+import Button from '@material-ui/core/Button';
 
-class App extends React.Component {
-  componentDidMount(){
-    this.props.fetchTodos();
-  }
-  render(){
-    return (
-      <div>
-        <VisibleTodoList />
-        <AddTodo />
-        <Footer />
-      </div>
-    )
-  }
-}
-export default App
+const App = ({history}) => (
+  <div>
+    <Button onClick={() => history.push("/login")}>ユーザー登録</Button>
+  </div>
+)
+
+export default App;

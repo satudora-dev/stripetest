@@ -13,9 +13,7 @@ const responsiveHeader = (cuid,history,signOut) => {
   }else{
     return (
       <div>
-        <Button onClick={() => history.push("/")}>ToDo</Button>
-        <Button onClick={() => history.push("/login")}>Login</Button>
-        <Button onClick={() => history.push("/signup")}>SignUp</Button>
+      <p>Satudora Prime</p>
       </div>
     )
   }

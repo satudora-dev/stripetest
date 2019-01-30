@@ -1,15 +1,9 @@
 import React from 'react';
 import { firebaseAuth } from '../../firebase';
 import Button from '@material-ui/core/Button';
-
+import TextField from '@material-ui/core/TextField';
 
 firebaseAuth().useDeviceLanguage();
-
-// var JsBarcode = require('jsbarcode');
-// var { createCanvas } = require("canvas");
-// var canvas = createCanvas();
-
-
 
 
 
@@ -32,7 +26,6 @@ class Login extends React.Component {
         this.onSignInSubmit();
       }
     })})
-    // JsBarcode(canvas, "Hello");
   }
 
   onSignInSubmit = () => {
@@ -62,27 +55,48 @@ class Login extends React.Component {
       {(() => {
         if(!this.state.codeSent){
           return (
-          <div>
-            <p>Enter Your Phone Number to confirm via SMS  ex.080XXXXXXXX</p>
-            <input className={'phone-number'} id={'phone-number'} onChange={e => this.setState({phoneNumber:e.target.value})} />
-            <Button id={'sign-in-Button'} onClick={() => {
-              this.onSignInSubmit();
-            }}>Signin</Button>
-          </div>
+            <div>
+              <div>
+                <p>SMSを利用して本人確認を行います</p>
+                  <TextField
+                    className={'phone-number'}
+                    id={'phone-number'}
+                    name="phone-number"
+                    label="電話番号(ex)"
+                    required={true}
+                    value={this.state.phoneNumber}
+                    onChange={e => this.setState({phoneNumber:e.target.value})}
+                    margin="normal"
+                  />
+              </div>
+              <div>
+                <Button id={'sign-in-Button'}
+                onClick={() => this.onSignInSubmit()}>同意してSMSを送る</Button>
+              </div>
+            </div>
           )
         }else{
           return (
             <div>
-              <p>Enter Confirmation 6-digits code   ex.999999</p>
-              <input className={'code'} id={'code'} onChange={e => this.setState({code:e.target.value})} />
-              <Button onClick={() => this.confirmCode()}>code</Button>
+              <div>
+                <p>SMSで届いた6桁の確認コードを入力してください</p>
+                  <TextField
+                    className={'code'}
+                    id={'code'}
+                    name="code"
+                    label="000xxx"
+                    required={true}
+                    value={this.state.code}
+                    onChange={e => this.setState({code:e.target.value})}
+                    margin="normal"
+                    />
+              </div>
+              <div>
+                <Button onClick={() => this.confirmCode()}>確認コードを送信</Button>
+              </div>
             </div>
           )
         }})()}
-        <div>
-          <Button onClick={() => console.log(this.state.phoneNumber)}>Phone confirmation</Button>
-        </div>
-
       </div>
     )
   }
