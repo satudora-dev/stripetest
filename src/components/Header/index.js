@@ -5,7 +5,10 @@ const responsiveHeader = (cuid,history,signOut) => {
   if (cuid){
     return (
       <div>
-        <p>Satudora Prime<Button onClick={() => signOut()}>signOut</Button></p>
+        <p>Satudora Prime<Button onClick={() => {
+          signOut();
+          history.push(`/`)
+        }}>signOut</Button></p>
         <Button onClick={() => history.push(`/mypage/${cuid}`)}>Member</Button>
         <Button onClick={() => history.push(`/mypage/${cuid}/card`)}>Card</Button>
         <Button onClick={() => history.push(`/mypage/${cuid}/send`)}>Send</Button>
