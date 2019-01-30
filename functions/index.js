@@ -37,9 +37,9 @@ exports.createStripeCharge = functions.firestore
     const snapval = snapshot.data();
     const customer = snapval.customer_id;
     const amount = val.amount;
-    const discription = val.discription;
+    const description = val.description;
     const idempotencyKey = context.params.id;
-    const charge = {amount, currency, customer, discription};
+    const charge = {amount, currency, customer, description};
     if (val.source !== null) {
        charge.source = val.source;
     }
