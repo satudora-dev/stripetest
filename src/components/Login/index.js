@@ -4,9 +4,17 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 firebaseAuth().useDeviceLanguage();
-
-
-
+const btnstyle = {
+  marginRight: "10px",
+  marginBottom: "10px",
+  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+  borderRadius: 3,
+  border: 0,
+  color: 'white',
+  height: 40,
+  padding: '0 30px',
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+}
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +38,6 @@ class Login extends React.Component {
 
   onSignInSubmit = () => {
     var appVerifier = this.state.recaptchaVerifier;
-
     firebaseAuth().signInWithPhoneNumber('+81' + this.state.phoneNumber.slice(1), appVerifier)
       .then( (confirmationResult) => {
         this.setState({
@@ -45,11 +52,12 @@ class Login extends React.Component {
   confirmCode = () => {
     this.state.confirmationResult.confirm(this.state.code).then( (result) => {
       var user = result.user;
-      this.props.history.push('/')
+      this.props.history.push('/');
     })
   }
 
   render(){
+    if(this.props.cuid) return this.props.history.push('/mypage')
     return (
       <div>
       {(() => {
@@ -70,7 +78,7 @@ class Login extends React.Component {
                   />
               </div>
               <div>
-                <Button id={'sign-in-Button'}
+                <Button style={btnstyle} id={'sign-in-Button'}
                 onClick={() => this.onSignInSubmit()}>同意してSMSを送る</Button>
               </div>
             </div>
@@ -92,7 +100,7 @@ class Login extends React.Component {
                     />
               </div>
               <div>
-                <Button onClick={() => this.confirmCode()}>確認コードを送信</Button>
+                <Button style={btnstyle} onClick={() => this.confirmCode()}>確認コードを送信</Button>
               </div>
             </div>
           )

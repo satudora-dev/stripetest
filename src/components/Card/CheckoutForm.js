@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+const btnstyle = {
+  marginRight: "10px",
+  marginBottom: "10px",
+  backgroundColor: "purple",
+  "color": "white",
+  textTransform: "none",
+}
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -21,7 +28,7 @@ class CheckoutForm extends Component {
     return (
       <div className="checkout">
         <CardElement />
-        <Button onClick={this.submit}>Send</Button>
+        <Button style={btnstyle}onClick={this.submit}>Send</Button>
       </div>
     );
   }

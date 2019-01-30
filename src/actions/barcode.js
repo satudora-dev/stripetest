@@ -3,7 +3,11 @@ import JsBarcode from 'jsbarcode';
 const barcodeLogRef = fireStore.collection('barcode_log');
 
 export const generateOTBarcode = (cuid,prime, generated) => dispatch => {
-  if(generated ) return JsBarcode('#barcode',generated);
+  console.log(generated);
+  console.log(prime);
+  if(generated && !(generated.split("-")[1] == "f" && prime) && !(generated.split("-")[1] == "p" && !prime )){
+    return JsBarcode('#barcode',generated);
+  } ;
 
   const gen_time = new Date().getTime();
   const status = prime  ?  "p" : "f" ;

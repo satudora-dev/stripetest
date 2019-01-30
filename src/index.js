@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './containers/Header';
 import App from './components/App';
-import Login from './components/Login';
+import Login from './containers/Login';
 import Card from './containers/Card';
 import MyPage from './containers/MyPage';
 import History from './containers/History';
@@ -21,13 +21,13 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route path="/" component={ Header } />
+        <Route path="/:c0Path?/:cPath?" component={ Header } />
         <Route exact path="/" component={ App } />
         <Route exact path="/login" component={ Login } />
-        <Route exact path="/mypage/:cuid" component={ MyPage } />
-        <Route exact path="/mypage/:cuid/card" component={ Card } />
-        <Route exact path="/mypage/:cuid/send" component={ Send } />
-        <Route exact path="/mypage/:cuid/history" component={ History } />
+        <Route exact path="/mypage/" component={ MyPage } />
+        <Route exact path="/mypage/card" component={ Card } />
+        <Route exact path="/mypage/send" component={ Send } />
+        <Route exact path="/mypage/history" component={ History } />
       </div>
     </BrowserRouter>
   </Provider>,

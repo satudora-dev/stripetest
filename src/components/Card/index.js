@@ -3,6 +3,14 @@ import CheckoutForm from '../../containers/Card/CheckoutForm';
 import Button from '@material-ui/core/Button';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 
+const btnstyle = {
+  marginRight: "10px",
+  marginBottom: "10px",
+  backgroundColor: "purple",
+  "color": "white",
+  textTransform: "none",
+}
+
 class Card extends React.Component {
   constructor(props){
     super(props);
@@ -16,7 +24,7 @@ class Card extends React.Component {
       <div>
       <StripeProvider apiKey="pk_test_PxKNDGSHcqzbtnBgOuecPwU3">
         <div className="example">
-          <h3>Register your card</h3>
+          <h3>カードを登録する</h3>
           <Elements>
             <CheckoutForm />
           </Elements>
@@ -32,13 +40,10 @@ class Card extends React.Component {
               return (
                 <div>
                   <p>{card.brand + "    下4桁" + card.last4}</p>
-                  <Button key={i} variant="contained" >
-                    編集
-                  </Button>
                 </div>
               );
             })}
-        <Button onClick={() => this.setState({register: true})}>Register new card</Button>
+        <Button style={btnstyle} onClick={() => this.setState({register: true})}>新しいカードを登録する</Button>
       </div>
     )
   }
