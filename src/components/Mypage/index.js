@@ -1,20 +1,25 @@
-import React from 'react';
+import React from 'react'
+import JsBarcode from 'jsbarcode';
 import Button from '@material-ui/core/Button';
 
-
-class Mypage extends React.Component {
-
+class MyPage extends React.Component {
+  componentDidMount(){
+    if(this.props.cuid){
+      this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
+      window.setTimeout(() => {
+        this.props.eraseBarcode();
+      }, 30*60*1000)
+    }
+  }
   render(){
-    const cuid = this.props.match.params.cuid;
-    return (
-      <div>
-        <Button onClick={() => this.props.history.push(`/mypage/${cuid}/point`)}>Point</Button>
-        <Button onClick={() => this.props.history.push(`/mypage/${cuid}/purchaselog`)}>Purchase Log</Button>
-        <Button onClick={() => this.props.history.push(`/mypage/${cuid}/card`)}>Manage Card</Button>
-      </div>
+    return(
+    <div>
+      <svg id="barcode"></svg>
+      <p>This barcode will be invalid after 30 minites</p>
+      <Button onClick={() => this.props.upgradePrime(this.props.cuid)}>Prime会員になる</Button>
+    </div>
     )
   }
 }
 
-
-export default Mypage
+export default MyPage

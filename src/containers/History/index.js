@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import PurchaseLog from '../../components/PurchaseLog';
+import History from '../../components/History';
 import { fetchUserCharges, createRefund } from '../../actions/charges'
 const mapStateToProps = state => ({
   cuid: state.auth.cuid,
@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PurchaseLog)
+)(History)

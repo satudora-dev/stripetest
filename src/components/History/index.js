@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-class PurchaseLog extends React.Component {
+class History extends React.Component {
   componentDidMount(){
     if(this.props.cuid){
       this.props.fetchUserCharges(this.props.cuid);
@@ -43,4 +43,4 @@ class PurchaseLog extends React.Component {
 
 }
 
-export default PurchaseLog
+export default History

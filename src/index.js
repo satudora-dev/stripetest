@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import Header from './containers/Header';
 import App from './components/App';
 import Login from './components/Login';
-import Mypage from './components/Mypage';
 import Card from './containers/Card';
-import Point from './containers/Point';
-import PurchaseLog from './containers/PurchaseLog';
+import MyPage from './containers/MyPage';
+import History from './containers/History';
+import Send from './containers/Send';
 
 import {BrowserRouter,Route} from 'react-router-dom';
 import { Provider } from 'react-redux'
@@ -24,10 +24,10 @@ ReactDOM.render(
         <Route path="/" component={ Header } />
         <Route exact path="/" component={ App } />
         <Route exact path="/login" component={ Login } />
-        <Route exact path="/mypage/:cuid" component={ Mypage } />
+        <Route exact path="/mypage/:cuid" component={ MyPage } />
         <Route exact path="/mypage/:cuid/card" component={ Card } />
-        <Route exact path="/mypage/:cuid/point" component={ Point } />
-        <Route exact path="/mypage/:cuid/purchaselog" component={ PurchaseLog } />
+        <Route exact path="/mypage/:cuid/send" component={ Send } />
+        <Route exact path="/mypage/:cuid/history" component={ History } />
       </div>
     </BrowserRouter>
   </Provider>,
