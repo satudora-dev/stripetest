@@ -13,11 +13,15 @@ export const upgradePrime = (cuid) => dispatch => {
   stripeCustomerRef.doc(cuid).collection("prime").add({status:"p"});
 }
 
-const setCurrentUser = (currentUserID,prime)  => {
+export const deletePrime = (cuid, primeID) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("prime").doc(primeID).update({asako:true});
+}
+
+const setCurrentUser = (currentUserID,primeID)  => {
   return {
     type: 'SET_CURRENT_USER',
     currentUserID: currentUserID,
-    prime: prime
+    prime: primeID
   }
 }
 
@@ -27,7 +31,7 @@ export const fetchCurrentUser = () => dispatch => {
       stripeCustomerRef.doc(user.uid).collection("prime").onSnapshot((snapshot) => {
         let prime;
         snapshot.docs.forEach((doc) => {
-          prime=doc.data();
+          prime=doc.id;
         })
         dispatch(setCurrentUser(user.uid,prime));
       })

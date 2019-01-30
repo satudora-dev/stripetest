@@ -7,6 +7,11 @@ class History extends React.Component {
       this.props.fetchUserCharges(this.props.cuid);
     }
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.cuid !== prevProps.cuid && this.props.cuid) {
+      this.props.fetchUserCharges(this.props.cuid);
+    }
+  }
   render(){
     const charges = this.props.charges || [];
     return(

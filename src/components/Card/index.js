@@ -19,6 +19,11 @@ class Card extends React.Component {
   componentDidMount(){
     if(this.props.cuid)this.props.fetchUserSources(this.props.cuid);
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.cuid !== prevProps.cuid && this.props.cuid) {
+      this.props.fetchUserSources(this.props.cuid);
+    }
+  }
   render(){
     if(this.state.register) return (
       <div>

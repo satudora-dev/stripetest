@@ -10,6 +10,14 @@ const btnstyle = {
   textTransform: "none",
 }
 
+const ymlstyle = {
+  marginRight: "10px",
+  marginBottom: "10px",
+  backgroundColor: "purple",
+  "color": "white",
+  textTransform: "none",
+}
+
 const disablestyle = {
   marginRight: "10px",
   marginBottom: "10px",
@@ -26,12 +34,19 @@ class MyPage extends React.Component {
         this.props.eraseBarcode();
       }, 30*60*1000)
     }
+    // this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
   }
   componentDidUpdate(prevProps) {
-  if (this.props.prime !== prevProps.prime) {
-    this.props.generateOTBarcode(this.props.cuid, this.props.prime);
+    if (this.props.cuid !== prevProps.cuid && this.props.cuid) {
+      this.props.fetchUserSources(this.props.cuid);
+    }
+    if(this.props.prime !== prevProps.prime && this.props.cuid){
+      this.props.generateOTBarcode(this.props.cuid, this.props.prime);
+      window.setTimeout(() => {
+        this.props.eraseBarcode();
+      }, 30*60*1000)
+    }
   }
-}
 
   render(){
     if(!this.props.prime){
@@ -47,7 +62,7 @@ class MyPage extends React.Component {
         <div>
           <svg id="barcode"></svg>
           <p>このバーコードは生成から30分で失効します</p>
-          <Button style={!this.props.prime ? disablestyle:btnstyle} onClick={() => this.props.deletePrime(this.props.cuid)}>Prime会員をやめる</Button>
+          <Button style={!this.props.prime ? disablestyle:ymlstyle} onClick={() => this.props.deletePrime(this.props.cuid, this.props.prime)}>Prime会員をやめる</Button>
         </div>
       )
     }

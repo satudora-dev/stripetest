@@ -52,7 +52,7 @@ class Login extends React.Component {
   confirmCode = () => {
     this.state.confirmationResult.confirm(this.state.code).then( (result) => {
       var user = result.user;
-      this.props.history.push('/');
+      this.props.history.push('/mypage');
     })
   }
 
