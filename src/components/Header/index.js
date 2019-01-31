@@ -18,6 +18,10 @@ const disablestyle = {
   width: 100,
   backgroundColor: "grey",
   "color": "white",
+  borderRadius: 3,
+  border: 0,
+  padding: '0 30px',
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 }
 
 const responsiveHeader = (cuid,history,signOut,match) => {

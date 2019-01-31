@@ -4,7 +4,7 @@ import {CardElement, injectStripe} from 'react-stripe-elements';
 const btnstyle = {
   marginRight: "10px",
   marginBottom: "10px",
-  backgroundColor: "purple",
+  backgroundColor: "#04B486",
   "color": "white",
   textTransform: "none",
 }

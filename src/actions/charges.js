@@ -28,10 +28,11 @@ export const addToken = (uid, token) => dispatch => {
 }
 
 export const createCharge = (cuid, amount, description) => dispatch => {
-  stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount, description: description});
+  stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount, description: description,status:"pending"});
 }
 
 
 export const createRefund = (cuid, chargeId) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("charges").update({status:"pending"})
   stripeCustomerRef.doc(cuid).collection("refunds").add({chargeId:chargeId});
 }

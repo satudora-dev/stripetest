@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 const btnstyle = {
   marginRight: "10px",
   marginBottom: "10px",
-  backgroundColor: "purple",
+  backgroundColor: "#04B486",
   "color": "white",
   textTransform: "none",
 }
@@ -26,7 +26,7 @@ class Send extends React.Component {
   render(){
     return(
     <div>
-      <Button disable={!this.props.sources} style={!this.props.sources ? disablestyle:btnstyle} onClick={() => this.props.createCharge(this.props.cuid,2000, "Thanks!! Satudora!")}>サツドラに２０００円寄付する</Button>
+      <Button disable={!this.props.sources} style={!this.props.sources ? disablestyle:btnstyle} onClick={() => this.props.createCharge(this.props.cuid,2000, "Thanks!! Satudora!")}>サツドラに2000円送金する</Button>
     </div>
     )
   }

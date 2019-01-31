@@ -18,7 +18,8 @@ export const generateOTBarcode = (cuid,prime, generated) => dispatch => {
 }
 
 export const eraseBarcode = () => dispatch => {
-  document.getElementById("barcode").remove();
+  const Barcode = document.getElementById("barcode");
+  if(Barcode) Barcode.remove();
   return dispatch({
     type: 'ERASE_BARCODE',
     barcode: null

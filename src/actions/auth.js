@@ -10,11 +10,11 @@ export const signOut = () => dispatch => {
 }
 
 export const upgradePrime = (cuid) => dispatch => {
-  stripeCustomerRef.doc(cuid).collection("prime").add({status:"p"});
+  stripeCustomerRef.doc(cuid).collection("prime").add({status:"pending"});
 }
 
 export const deletePrime = (cuid, primeID) => dispatch => {
-  stripeCustomerRef.doc(cuid).collection("prime").doc(primeID).update({asako:true});
+  stripeCustomerRef.doc(cuid).collection("prime").doc(primeID).update({status:"pending"});
 }
 
 const setCurrentUser = (currentUserID,primeID)  => {

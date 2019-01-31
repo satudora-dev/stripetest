@@ -52,6 +52,7 @@ class MyPage extends React.Component {
     if(!this.props.prime){
       return(
         <div>
+          <p style={{marginBottom: "10px",marginTop: "10px",padding: '0 30px'}}>会員バーコード</p>
           <svg id="barcode"></svg>
           <p>このバーコードは生成から30分で失効します</p>
           <Button style={this.props.prime ? disablestyle:btnstyle} onClick={() => this.props.upgradePrime(this.props.cuid)}>Prime会員になる</Button>
