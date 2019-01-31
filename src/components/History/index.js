@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ymlstyle = {
   marginLeft: "20px",
@@ -10,7 +11,7 @@ const ymlstyle = {
 }
 
 const format = (unixTime) => {
-  const date = new Date(unixTime);
+  const date = new Date(unixTime*1000);
   const years = date.getFullYear();
   const month = "0" + date.getMonth() + 1;
   const day = "0" + date.getDate();
@@ -37,7 +38,7 @@ class History extends React.Component {
       return(
       <div>
         {charges.map((charge, i) => {
-          if(!charge.refunded){
+          if(!charge.refunded && charge.status === "succeeded"){
             return (
               <div style={{marginBottom: "20px"}}>
                   <span style={{marginLeft: "20px",}}>{format(charge.created)}</span>
@@ -48,6 +49,15 @@ class History extends React.Component {
                 </Button>
               </div>
             );
+          }else if(charge.status === "pending"){
+            return(
+              <div style={{marginBottom: "20px"}}>
+                <span style={{marginLeft: "20px",}}>{format(charge.created)}</span>
+                <span style={{marginLeft: "20px",}}>{charge.amount + "¥"}</span>
+                <span style={{marginLeft: "20px",}}>{"詳細:" + charge.description}</span>
+                <CircularProgress />
+              </div>
+            )
           }
           else {
             return (

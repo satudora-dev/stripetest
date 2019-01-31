@@ -1,6 +1,7 @@
 import React from 'react'
 import JsBarcode from 'jsbarcode';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const btnstyle = {
   marginRight: "10px",
@@ -87,7 +88,7 @@ class MyPage extends React.Component {
         <div>
           <svg id="barcode"></svg>
           <p>このバーコードは生成から30分で失効します</p>
-          <Button style={disablestyle} >Pending</Button>
+          <CircularProgress />
         </div>
       )
     }else {
