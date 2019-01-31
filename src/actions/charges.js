@@ -20,12 +20,7 @@ export const fetchUserCharges = (cuid) => dispatch => {
   })
 }
 
-export const addToken = (uid, token) => dispatch => {
-  if(!uid || !token){
-    return;
-  }
-  stripeCustomerRef.doc(uid).collection('/tokens').add({token:token});
-}
+
 
 export const createCharge = (cuid, amount, description) => dispatch => {
   stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount, description: description,status:"pending"});

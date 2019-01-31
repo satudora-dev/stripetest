@@ -37,20 +37,28 @@ class Card extends React.Component {
       </StripeProvider>
       </div>
     )
-    const cards = this.props.sources || [];
-    return (
+    if(this.props.sources[0]){
+      const cards = this.props.sources;
+      return (
+        <div>
+          {cards.map((card, i) => {
+                return (
+                  <div>
+                    <p>{card.brand + "    下4桁" + card.last4}</p>
+                  </div>
+                );
+              })}
+        </div>
+      )
+    } else{
+      return (
+        <div>
+          <p>カードが登録されていません</p>
+          <Button style={btnstyle} onClick={() => this.setState({register: true})}>新しいカードを登録する</Button>
+        </div>
+      )
+    }
 
-      <div>
-        {cards.map((card, i) => {
-              return (
-                <div>
-                  <p>{card.brand + "    下4桁" + card.last4}</p>
-                </div>
-              );
-            })}
-        <Button style={btnstyle} onClick={() => this.setState({register: true})}>新しいカードを登録する</Button>
-      </div>
-    )
   }
 }
 export default Card
