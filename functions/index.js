@@ -86,12 +86,12 @@ exports.createStripeRefund = functions.firestore
 
 exports.deleteStripeSubscription = functions.firestore
   .document('stripe_customers/{userId}/prime/{id}')
-  .onUpdate(async (change, context) => {
+  .onDelete(async (snap, context) => {
     const snapshot = await admin.firestore()
     .collection(`stripe_customers`)
     .doc(context.params.userId).get();
-    const subscription = change.before.data().id;
+    const subscription = snap.data().id;
     const sub = await stripe.subscriptions.del(subscription);
-    const sourceDocRef = admin.firestore().collection(`stripe_customers`).doc(context.params.userId).collection("sources").doc(context.params.id);
-    return sourceDocRef.update(sub);
+    // const sourceDocRef = admin.firestore().collection(`stripe_customers`).doc(context.params.userId).collection("sources").doc(context.params.id);
+    // return sourceDocRef.update(sub);
 });

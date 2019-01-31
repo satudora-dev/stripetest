@@ -13,9 +13,13 @@ export const upgradePrime = (cuid) => dispatch => {
   stripeCustomerRef.doc(cuid).collection("prime").add({status:"pending"});
 }
 
-export const deletePrime = (cuid, primeID) => dispatch => {
-  stripeCustomerRef.doc(cuid).collection("prime").doc(primeID).update({status:"pending"});
-}
+export const deletePrime = (cuid, prime) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("prime").where("id", "==", prime.id).get().then( (querySnapshot) => {
+      querySnapshot.forEach((primeDoc) => {
+        stripeCustomerRef.doc(cuid).collection("prime").doc(primeDoc.id).delete();
+      })
+    })
+};
 
 const setCurrentUser = (currentUserID,primeID)  => {
   return {
@@ -31,7 +35,7 @@ export const fetchCurrentUser = () => dispatch => {
       stripeCustomerRef.doc(user.uid).collection("prime").onSnapshot((snapshot) => {
         let prime;
         snapshot.docs.forEach((doc) => {
-          prime=doc.id;
+          prime=doc.data();
         })
         dispatch(setCurrentUser(user.uid,prime));
       })

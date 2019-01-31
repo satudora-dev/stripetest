@@ -3,10 +3,10 @@ import JsBarcode from 'jsbarcode';
 const barcodeLogRef = fireStore.collection('barcode_log');
 
 export const generateOTBarcode = (cuid,prime, generated) => dispatch => {
-  if(generated ) return JsBarcode('#barcode',generated);
+  if(generated) return JsBarcode('#barcode',generated);
 
   const gen_time = new Date().getTime();
-  const status = prime  ?  "p" : "f" ;
+  const status = prime && prime.status === "active"  ?  "p" : "f" ;
   const newBarcode =  cuid + '-' + status + '-' + gen_time;
 
   JsBarcode('#barcode',newBarcode);

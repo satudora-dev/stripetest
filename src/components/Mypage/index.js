@@ -26,6 +26,12 @@ const disablestyle = {
 }
 
 class MyPage extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      spinner:false
+    }
+  }
   componentDidMount(){
     if(this.props.cuid){
       this.props.fetchUserSources(this.props.cuid);
@@ -34,11 +40,14 @@ class MyPage extends React.Component {
         this.props.eraseBarcode();
       }, 30*60*1000)
     }
-    // this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
   }
   componentDidUpdate(prevProps) {
     if (this.props.cuid !== prevProps.cuid && this.props.cuid) {
       this.props.fetchUserSources(this.props.cuid);
+      this.props.generateOTBarcode(this.props.cuid, this.props.prime);
+      window.setTimeout(() => {
+        this.props.eraseBarcode();
+      }, 30*60*1000)
     }
     if(this.props.prime !== prevProps.prime && this.props.cuid){
       this.props.generateOTBarcode(this.props.cuid, this.props.prime);
@@ -46,19 +55,32 @@ class MyPage extends React.Component {
         this.props.eraseBarcode();
       }, 30*60*1000)
     }
+    // if(prevProps.prime && this.props.prime.status === "pending" && this.props.cuid){
+    //   this.setState({spinner:true});
+    // }
+    // if(prevProps.prime && prevProps.prime.status === "pending" && this.props.prime.status !==prevProps.prime.status  && this.props.cuid){
+    //   this.setState({spinner:false});
+    // }
   }
 
   render(){
     if(!this.props.prime){
       return(
         <div>
-          <p style={{marginBottom: "10px",marginTop: "10px",padding: '0 30px'}}>会員バーコード</p>
           <svg id="barcode"></svg>
           <p>このバーコードは生成から30分で失効します</p>
           <Button style={this.props.prime ? disablestyle:btnstyle} onClick={() => this.props.upgradePrime(this.props.cuid)}>Prime会員になる</Button>
         </div>
       )
-    }else{
+    }else if(this.props.prime.status === "pending"){
+      return(
+        <div>
+          <svg id="barcode"></svg>
+          <p>このバーコードは生成から30分で失効します</p>
+          <Button style={disablestyle} >Prime会員をやめる</Button>
+        </div>
+      )
+    }else {
       return(
         <div>
           <svg id="barcode"></svg>
