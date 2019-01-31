@@ -33,7 +33,7 @@ class History extends React.Component {
   }
   render(){
     const charges = this.props.charges;
-    if(charges !== []){
+    if(charges[0]){
       return(
       <div>
         {charges.map((charge, i) => {

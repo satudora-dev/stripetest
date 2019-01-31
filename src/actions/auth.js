@@ -37,6 +37,7 @@ export const fetchCurrentUser = () => dispatch => {
         snapshot.docs.forEach((doc) => {
           prime=doc.data();
         })
+        console.log(prime)
         dispatch(setCurrentUser(user.uid,prime));
       })
     }else{

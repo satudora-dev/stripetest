@@ -80,8 +80,12 @@ exports.createStripeRefund = functions.firestore
     const response = await stripe.refunds.create({charge: chargeId});
     await snap.ref.set(response, { merge: true });
     const refunded_charge = await stripe.charges.retrieve(chargeId);
-    const chargeDocRef = admin.firestore().collection(`stripe_customers`).doc(context.params.userId).collection("charges").doc(context.params.id);
-    return chargeDocRef.update(refunded_charge);
+    const chargeRef = admin.firestore().collection(`stripe_customers`).doc(context.params.userId).collection("charges")
+    return chargeRef.where("id", "==", chargeId).get().then( (querySnapshot) => {
+      querySnapshot.forEach((chargeDoc) => {
+        chargeRef.doc(chargeDoc.id).update(refunded_charge);
+      })
+    })
 });
 
 exports.deleteStripeSubscription = functions.firestore

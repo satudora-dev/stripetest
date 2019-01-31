@@ -24,9 +24,12 @@ class Send extends React.Component {
     }
   }
   render(){
+    if(!this.props.sources[0]){
+      return <p>送金をするにはカードを登録してください</p>
+    }
     return(
     <div>
-      <Button disable={!this.props.sources} style={!this.props.sources ? disablestyle:btnstyle} onClick={() => this.props.createCharge(this.props.cuid,2000, "Thanks!! Satudora!")}>サツドラに2000円送金する</Button>
+      <Button disable={this.props.sources === []} style={!this.props.sources ? disablestyle:btnstyle} onClick={() => this.props.createCharge(this.props.cuid,2000, "Thanks!! Satudora!")}>サツドラに2000円送金する</Button>
     </div>
     )
   }

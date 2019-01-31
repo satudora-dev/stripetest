@@ -64,6 +64,16 @@ class MyPage extends React.Component {
   }
 
   render(){
+    if(!this.props.sources[0]){
+      return (
+        <div>
+          <svg id="barcode"></svg>
+          <p>このバーコードは生成から30分で失効します</p>
+          <p>Prime会員になるにはカードを登録してください</p>
+          <Button style={disablestyle} >Prime会員になる</Button>
+        </div>
+      )
+    }
     if(!this.props.prime){
       return(
         <div>
@@ -77,7 +87,7 @@ class MyPage extends React.Component {
         <div>
           <svg id="barcode"></svg>
           <p>このバーコードは生成から30分で失効します</p>
-          <Button style={disablestyle} >Prime会員をやめる</Button>
+          <Button style={disablestyle} >Pending</Button>
         </div>
       )
     }else {
