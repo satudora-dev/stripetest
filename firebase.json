@@ -14,7 +14,11 @@
       "source" : "/*",
       "destination" : "/mypage",
       "type" : 301
-    }]
+    }],
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html"
+    } ]
   },
   "storage": {
     "rules": "storage.rules"
