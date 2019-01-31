@@ -20,18 +20,18 @@ export const fetchUserCharges = (cuid) => dispatch => {
   })
 }
 
-export const addToken = (uid, token) => dispatch => {
-  if(!uid || !token){
-    return;
-  }
-  stripeCustomerRef.doc(uid).collection('/tokens').add({token:token});
-}
+
 
 export const createCharge = (cuid, amount, description) => dispatch => {
-  stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount, description: description});
+  stripeCustomerRef.doc(cuid).collection("charges").add({amount:amount, description: description,status:"pending"});
 }
 
 
 export const createRefund = (cuid, chargeId) => dispatch => {
+  stripeCustomerRef.doc(cuid).collection("charges").where("id", "==", chargeId).get().then( (querySnapshot) => {
+      querySnapshot.forEach((chargeDoc) => {
+        stripeCustomerRef.doc(cuid).collection("charges").doc(chargeDoc.id).update({status:"pending"});
+      })
+    })
   stripeCustomerRef.doc(cuid).collection("refunds").add({chargeId:chargeId});
 }

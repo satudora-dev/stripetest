@@ -37,9 +37,9 @@ exports.createStripeCharge = functions.firestore
     const snapval = snapshot.data();
     const customer = snapval.customer_id;
     const amount = val.amount;
-    const discription = val.discription;
+    const description = val.description;
     const idempotencyKey = context.params.id;
-    const charge = {amount, currency, customer, discription};
+    const charge = {amount, currency, customer, description};
     if (val.source !== null) {
        charge.source = val.source;
     }
@@ -86,4 +86,14 @@ exports.createStripeRefund = functions.firestore
         chargeRef.doc(chargeDoc.id).update(refunded_charge);
       })
     })
+});
+
+exports.deleteStripeSubscription = functions.firestore
+  .document('stripe_customers/{userId}/prime/{id}')
+  .onDelete(async (snap, context) => {
+    const snapshot = await admin.firestore()
+    .collection(`stripe_customers`)
+    .doc(context.params.userId).get();
+    const subscription = snap.data().id;
+    const sub = await stripe.subscriptions.del(subscription);
 });

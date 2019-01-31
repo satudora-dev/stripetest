@@ -5,11 +5,13 @@ import auth from './auth'
 import sources from './sources'
 import charges from './charges'
 import barcode from './barcode'
+import token from './token'
 export default combineReducers({
   todos,
   visibilityFilter,
   auth,
   sources,
   charges,
-  barcode
+  barcode,
+  token
 })

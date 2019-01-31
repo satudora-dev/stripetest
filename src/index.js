@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './containers/Header';
-import App from './containers/App';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Mypage from './components/Mypage';
+import App from './components/App';
+import Login from './containers/Login';
 import Card from './containers/Card';
-import Point from './containers/Point';
-import PurchaseLog from './containers/PurchaseLog';
+import MyPage from './containers/MyPage';
+import History from './containers/History';
+import Send from './containers/Send';
 
 import {BrowserRouter,Route} from 'react-router-dom';
 import { Provider } from 'react-redux'
@@ -22,14 +21,13 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route path="/" component={ Header } />
+        <Route path="/:c0Path?/:cPath?" component={ Header } />
         <Route exact path="/" component={ App } />
         <Route exact path="/login" component={ Login } />
-        <Route exact path="/signup" component={ Signup } />
-        <Route exact path="/mypage/:cuid" component={ Mypage } />
-        <Route exact path="/mypage/:cuid/card" component={ Card } />
-        <Route exact path="/mypage/:cuid/point" component={ Point } />
-        <Route exact path="/mypage/:cuid/purchaselog" component={ PurchaseLog } />
+        <Route exact path="/mypage/" component={ MyPage } />
+        <Route exact path="/mypage/card" component={ Card } />
+        <Route exact path="/mypage/send" component={ Send } />
+        <Route exact path="/mypage/history" component={ History } />
       </div>
     </BrowserRouter>
   </Provider>,
