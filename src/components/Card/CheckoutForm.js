@@ -34,7 +34,6 @@ class CheckoutForm extends Component {
   render() {
     if (this.state.complete) return <h1>登録完了しました</h1>;
     if(this.state.token) return <CircularProgress />
-
     return (
       <div className="checkout">
         <CardElement />
