@@ -24,28 +24,6 @@ const disablestyle = {
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 }
 
-const responsiveHeader = (cuid,history,signOut,match) => {
-  if (cuid){
-    return (
-      <div>
-        <p>Satudora Prime<Button style={btnstyle} onClick={() => {
-          signOut();
-          history.push(`/`)
-        }}>signOut</Button></p>
-        <Button style={!match.params.cPath ? disablestyle:btnstyle} disable={match.params.cPath == ""} onClick={() => history.push(`/mypage/`)}>Member</Button>
-        <Button style={match.params.cPath == "card" ? disablestyle:btnstyle} disable={match.params.cPath == "card"} onClick={() => history.push(`/mypage/card`)}>Card</Button>
-        <Button style={match.params.cPath == "send" ? disablestyle:btnstyle} disable={match.params.cPath == "send"} onClick={() => history.push(`/mypage/send`)}>Send</Button>
-        <Button style={match.params.cPath == "history" ? disablestyle:btnstyle} disable={match.params.cPath == "history"} onClick={() => history.push(`/mypage/history`)}>History</Button>
-      </div>
-    )
-  }else{
-    return (
-      <div>
-      <p>Satudora Prime</p>
-      </div>
-    )
-  }
-}
 
 
 
@@ -53,8 +31,50 @@ class Header extends React.Component {
   componentDidMount(){
     this.props.fetchCurrentUser();
   }
+  checkPath(cPath, target){
+    return cPath === target;
+  }
   render(){
-    return responsiveHeader(this.props.cuid, this.props.history, this.props.signOut,this.props.match)
+    if (this.props.cuid){
+      return (
+        <div>
+          <p>Satudora Prime<Button style={btnstyle} onClick={() => {
+            this.props.signOut();
+            this.props.history.push(`/`);
+          }}>signOut</Button></p>
+          <Button
+            style={this.checkPath(this.props.match.params.cPath,undefined) ? disablestyle:btnstyle}
+            disable={this.checkPath(this.props.match.params.cPath,undefined)}
+            onClick={() => this.props.history.push(`/mypage/`)}>
+            Member
+          </Button>
+          <Button
+            style={this.checkPath(this.props.match.params.cPath,"card") ? disablestyle:btnstyle}
+            disable={this.checkPath(this.props.match.params.cPath,"card")}
+            onClick={() => this.props.history.push(`/mypage/card`)}>
+            Card
+          </Button>
+          <Button
+            style={this.checkPath(this.props.match.params.cPath,"send") ? disablestyle:btnstyle}
+            disable={this.checkPath(this.props.match.params.cPath,"send")}
+            onClick={() => this.props.history.push(`/mypage/send`)}>
+            Send
+          </Button>
+          <Button
+            style={this.checkPath(this.props.match.params.cPath,"history") ? disablestyle:btnstyle}
+            disable={this.checkPath(this.props.match.params.cPath,"history")}
+            onClick={() => this.props.history.push(`/mypage/history`)}>
+            History
+          </Button>
+        </div>
+      )
+    }else{
+      return (
+        <div>
+        <p>Satudora Prime</p>
+        </div>
+      )
+    }
   }
 }
 
