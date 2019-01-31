@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const btnstyle = {
   marginRight: "10px",
   marginBottom: "10px",
+  marginTop: "40px",
   backgroundColor: "#04B486",
   "color": "white",
   textTransform: "none",
@@ -19,6 +20,7 @@ class CheckoutForm extends Component {
 
   async submit(ev) {
     let {token} = await this.props.stripe.createToken({name: "Name"});
+    if (!token) return;
     await this.props.addToken(this.props.cuid, token.id);
   }
   componentDidUpdate(prevProps) {
