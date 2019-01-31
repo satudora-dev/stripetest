@@ -22,6 +22,11 @@ class App extends React.Component {
       }, 30*60*1000)
     }
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.cuid !== prevProps.cuid && this.props.cuid) {
+      this.props.history.push(`/mypage`);
+    }
+  }
   render(){
     if (this.props.cuid){
       return this.props.history.push(`/mypage`);
