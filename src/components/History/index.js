@@ -61,7 +61,7 @@ class History extends React.Component {
           }
           else {
             return (
-              <div>
+              <div style={{marginBottom: "20px"}}>
                 <span style={{marginLeft: "20px",}}>{format(charge.refunds.data[0].created)}</span>
                 <span style={{marginLeft: "20px",}}>{charge.amount_refunded + "¥"}</span>
                 <span style={{marginLeft: "20px",}}>{"詳細:" + charge.description}</span>
