@@ -96,6 +96,4 @@ exports.deleteStripeSubscription = functions.firestore
     .doc(context.params.userId).get();
     const subscription = snap.data().id;
     const sub = await stripe.subscriptions.del(subscription);
-    // const sourceDocRef = admin.firestore().collection(`stripe_customers`).doc(context.params.userId).collection("sources").doc(context.params.id);
-    // return sourceDocRef.update(sub);
 });
