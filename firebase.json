@@ -9,7 +9,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "redirects": [ {
+      "source" : "/*",
+      "destination" : "/mypage",
+      "type" : 301
+    }]
   },
   "storage": {
     "rules": "storage.rules"
