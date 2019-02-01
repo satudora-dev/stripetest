@@ -34,6 +34,7 @@ class MyPage extends React.Component {
     }
   }
   componentDidMount(){
+    this.props.fetchCurrentUser();
     if(this.props.cuid){
       this.props.fetchUserSources(this.props.cuid);
       this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
@@ -56,12 +57,6 @@ class MyPage extends React.Component {
         this.props.eraseBarcode();
       }, 30*60*1000)
     }
-    // if(prevProps.prime && this.props.prime.status === "pending" && this.props.cuid){
-    //   this.setState({spinner:true});
-    // }
-    // if(prevProps.prime && prevProps.prime.status === "pending" && this.props.prime.status !==prevProps.prime.status  && this.props.cuid){
-    //   this.setState({spinner:false});
-    // }
   }
 
   render(){

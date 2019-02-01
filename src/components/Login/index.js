@@ -57,7 +57,10 @@ class Login extends React.Component {
   }
 
   render(){
-    if(this.props.cuid) return this.props.history.push('/mypage')
+    if(this.props.cuid) {
+      this.props.history.push('/mypage')
+      return null;
+    }
     return (
       <div>
       {(() => {

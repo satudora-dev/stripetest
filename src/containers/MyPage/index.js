@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MyPage from '../../components/MyPage';
 import { generateOTBarcode, eraseBarcode } from '../../actions/barcode'
-import { upgradePrime, deletePrime } from '../../actions/auth'
+import { fetchCurrentUser,upgradePrime, deletePrime } from '../../actions/auth'
 import { createCharge } from '../../actions/charges'
 import { fetchUserSources } from '../../actions/sources';
 const mapStateToProps = state => ({
@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchCurrentUser: () => dispatch(fetchCurrentUser()),
   generateOTBarcode: (cuid,prime, generated) => dispatch(generateOTBarcode(cuid,prime, generated)),
   eraseBarcode: () => dispatch(eraseBarcode()),
   upgradePrime: (cuid) => dispatch(upgradePrime(cuid)),

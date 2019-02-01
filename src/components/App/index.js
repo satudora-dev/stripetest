@@ -15,12 +15,7 @@ const btnstyle = {
 
 class App extends React.Component {
   componentDidMount(){
-    if(this.props.cuid){
-      this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
-      window.setTimeout(() => {
-        this.props.eraseBarcode();
-      }, 30*60*1000)
-    }
+    this.props.fetchCurrentUser();
   }
   componentDidUpdate(prevProps) {
     if (this.props.cuid !== prevProps.cuid && this.props.cuid) {
@@ -28,15 +23,11 @@ class App extends React.Component {
     }
   }
   render(){
-    if (this.props.cuid){
-      return this.props.history.push(`/mypage`);
-    }else{
       return (
         <div>
           <Button style={btnstyle} onClick={() => this.props.history.push("/login")}>ユーザー登録</Button>
         </div>
       )
-    }
   }
 }
 
