@@ -32,7 +32,7 @@ class History extends React.Component {
   formatTime(unixTime){
     const date = new Date(unixTime*1000);
     const years = date.getFullYear();
-    const month = "0" + date.getMonth() + 1;
+    const month = "0" + (date.getMonth() + 1);
     const day = "0" + date.getDate();
     const yymmdd = years + "-" + month.substr(-2) + "-" + day.substr(-2)
     const hours = date.getHours();
