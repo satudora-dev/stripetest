@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { fetchUserSources } from '../../actions/sources';
-import Card from '../../components/Card';
+import { fetchUserSources } from 'actions/sources';
+import Card from 'components/Card';
 
 const mapStateToProps = state => ({
   cuid: state.auth.cuid,

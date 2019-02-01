@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Login from '../../components/Login';
-import { fetchUserCharges, createRefund } from '../../actions/charges'
+import Login from 'components/Login';
+import { fetchUserCharges, createRefund } from 'actions/charges'
 const mapStateToProps = state => ({
   cuid: state.auth.cuid,
   charges: state.charges

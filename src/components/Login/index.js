@@ -1,9 +1,8 @@
 import React from 'react';
-import { firebaseAuth } from '../../firebase';
+import { firebaseAuth } from 'firebase';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-firebaseAuth().useDeviceLanguage();
 const btnstyle = {
   marginRight: "10px",
   marginBottom: "10px",

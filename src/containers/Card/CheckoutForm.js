@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { addToken } from '../../actions/token';
-import CheckoutForm from '../../components/Card/CheckoutForm';
+import { addToken } from 'actions/token';
+import CheckoutForm from 'components/Card/CheckoutForm';
 
 const mapStateToProps = state => ({
   cuid: state.auth.cuid,
