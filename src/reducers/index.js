@@ -6,6 +6,7 @@ import sources from './sources'
 import charges from './charges'
 import barcode from './barcode'
 import token from './token'
+import smsreCAPTCHA from './smsreCAPTCHA'
 export default combineReducers({
   todos,
   visibilityFilter,
@@ -13,5 +14,6 @@ export default combineReducers({
   sources,
   charges,
   barcode,
-  token
+  token,
+  smsreCAPTCHA
 })
