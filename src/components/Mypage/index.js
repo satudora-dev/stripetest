@@ -34,6 +34,7 @@ class MyPage extends React.Component {
     }
   }
   componentDidMount(){
+    this.props.fetchCurrentUser();
     if(this.props.cuid){
       this.props.fetchUserSources(this.props.cuid);
       this.props.generateOTBarcode(this.props.cuid, this.props.prime, this.props.generated);
