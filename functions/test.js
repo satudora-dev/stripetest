@@ -1,11 +1,20 @@
-var stripe = require("stripe")("sk_test_9aXfMKxJRLeAlFKg7epTGby4");
 
 // stripe.customers.create({description: "user.uid"},function(err, subscription) {
 //     console.log(err)
 //     console.log(subscription)
 //   })
-
-;
+const childProcess = require('child_process');
+childProcess.exec('npm i', (error, stdout, stderr) => {
+  if(error) {
+    // エラー時は標準エラー出力を表示して終了
+    console.log(stderr);
+    return;
+  }
+  else {
+    // 成功時は標準出力を表示して終了
+    console.log(stdout);
+  }
+});
 
 //
 // console.log(stripe.products.create({

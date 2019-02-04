@@ -4,6 +4,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const stripe = require('stripe')(functions.config().stripe.token);
 const currency = 'USD';
+const Git = require('simple-git');
 admin.initializeApp(functions.config().firebase);
 
 exports.createStripeCustomer = functions.auth.user().onCreate( (user) => {
@@ -72,11 +73,6 @@ exports.createStripeRefund = functions.firestore
   .onCreate(async (snap, context) => {
     const val = snap.data();
     const chargeId = val.chargeId;
-    const snapshot = await admin.firestore()
-    .collection(`stripe_customers`)
-    .doc(context.params.userId).get();
-    const snapval = snapshot.data();
-    const customer = snapval.customer_id;
     const response = await stripe.refunds.create({charge: chargeId});
     await snap.ref.set(response, { merge: true });
     const refunded_charge = await stripe.charges.retrieve(chargeId);
@@ -91,9 +87,12 @@ exports.createStripeRefund = functions.firestore
 exports.deleteStripeSubscription = functions.firestore
   .document('stripe_customers/{userId}/prime/{id}')
   .onDelete(async (snap, context) => {
-    const snapshot = await admin.firestore()
-    .collection(`stripe_customers`)
-    .doc(context.params.userId).get();
     const subscription = snap.data().id;
-    const sub = await stripe.subscriptions.del(subscription);
+    await stripe.subscriptions.del(subscription);
+});
+
+exports.asakoTest = functions.https.onRequest(async (req, res)  => {
+    await Git().clone('https://github.com/TetsuFe/my-official-site.git', 'asako');
+    await console.log(Git("asako").log( (stdin,stdout,stderr) => console.log(stdout)));
+    return null;
 });

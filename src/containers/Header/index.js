@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { fetchCurrentUser, signOut } from '../../actions/auth';
-import Header from '../../components/Header';
+import { fetchCurrentUser, signOut } from 'actions/auth';
+import Header from 'components/Header';
 
 const mapStateToProps = state => ({
   cuid: state.auth.cuid

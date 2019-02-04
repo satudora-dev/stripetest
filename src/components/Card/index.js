@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckoutForm from '../../containers/Card/CheckoutForm';
+import CheckoutForm from 'containers/Card/CheckoutForm';
 import Button from '@material-ui/core/Button';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 

@@ -1,9 +1,7 @@
 import React from 'react';
-import { firebaseAuth } from '../../firebase';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-firebaseAuth().useDeviceLanguage();
 const btnstyle = {
   marginRight: "10px",
   marginBottom: "10px",
@@ -20,45 +18,22 @@ class Login extends React.Component {
     super(props);
     this.state = {
       codeSent: false,
-      recaptchaVerifier: null,
-      confirmationResult: null,
       phoneNumber : "",
       code : "",
+
     };
   }
-
-  componentDidMount = () => {
-    this.setState({recaptchaVerifier: new firebaseAuth.RecaptchaVerifier('sign-in-Button', {
-      'size': 'invisible',
-      'callback': (response)  => {
-        this.onSignInSubmit();
-      }
-    })})
+  componentDidMount(){
+    this.props.setRecaptchaVerifier();
   }
-
-  onSignInSubmit = () => {
-    var appVerifier = this.state.recaptchaVerifier;
-    firebaseAuth().signInWithPhoneNumber('+81' + this.state.phoneNumber.slice(1), appVerifier)
-      .then( (confirmationResult) => {
-        this.setState({
-          confirmationResult:confirmationResult,
-          codeSent: true
-        })
-      }).catch(error => {
-        console.log(error)
-      })
+  componentDidUpdate(prevProps) {
+    if (this.props.confirmationResult !== prevProps.confirmationResult) {
+      this.setState({codeSent:true})
+    }
   }
-
-  confirmCode = () => {
-    this.state.confirmationResult.confirm(this.state.code).then( (result) => {
-      var user = result.user;
-      this.props.history.push('/mypage');
-    })
-  }
-
   render(){
     if(this.props.cuid) {
-      this.props.history.push('/mypage')
+      this.props.history.push('/mypage');
       return null;
     }
     return (
@@ -81,8 +56,10 @@ class Login extends React.Component {
                   />
               </div>
               <div>
-                <Button style={btnstyle} id={'sign-in-Button'}
-                onClick={() => this.onSignInSubmit()}>同意してSMSを送る</Button>
+                <Button style={btnstyle}
+                id={'sign-in-Button'}
+                onClick={() => this.props.smsSignIn(this.props.recaptchaVerifier, this.state.phoneNumber)}
+                disable={this.state.codeSent}>同意してSMSを送る</Button>
               </div>
             </div>
           )
@@ -103,7 +80,10 @@ class Login extends React.Component {
                     />
               </div>
               <div>
-                <Button style={btnstyle} onClick={() => this.confirmCode()}>確認コードを送信</Button>
+                <Button
+                  style={btnstyle}
+                  onClick={() => this.props.confirmCode(this.props.confirmationResult, this.state.code)}
+                  >確認する</Button>
               </div>
             </div>
           )
@@ -111,7 +91,6 @@ class Login extends React.Component {
       </div>
     )
   }
-
 }
 
 export default Login

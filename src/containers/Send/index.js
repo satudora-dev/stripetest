@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import Send from '../../components/Send';
-import { fetchUserCharges,createCharge } from '../../actions/charges';
-import { fetchUserSources } from '../../actions/sources';
+import Send from 'components/Send';
+import { fetchUserCharges,createCharge } from 'actions/charges';
+import { fetchUserSources } from 'actions/sources';
 const mapStateToProps = state => ({
   cuid: state.auth.cuid,
   sources: state.sources,

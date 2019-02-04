@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^4.2.0",
+    "child_process": "^1.0.2",
     "express": "^4.16.4",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0",
+    "simple-git": "^1.107.0",
     "stripe": "^6.20.0"
   },
   "private": true,
