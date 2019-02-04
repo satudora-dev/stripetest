@@ -37,6 +37,6 @@ const setConfirmatoinResultSuccess = confirmationResult => {
 
 export const confirmCode = (confirmationResult, code) => dispatch => {
   confirmationResult.confirm(code).then( (result) => {
-    var user = result.user
+    console.log(result)
   })
 }

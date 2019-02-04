@@ -1,5 +1,4 @@
 import React from 'react';
-import { firebaseAuth } from '../../firebase';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
@@ -21,13 +20,12 @@ class Login extends React.Component {
       codeSent: false,
       phoneNumber : "",
       code : "",
+
     };
   }
-
   componentDidMount(){
     this.props.setRecaptchaVerifier();
   }
-
   componentDidUpdate(prevProps) {
     if (this.props.confirmationResult !== prevProps.confirmationResult) {
       this.setState({codeSent:true})
@@ -58,8 +56,10 @@ class Login extends React.Component {
                   />
               </div>
               <div>
-                <Button style={btnstyle} id={'sign-in-Button'}
-                onClick={() => this.props.smsSignIn(this.props.recaptchaVerifier, this.state.phoneNumber)}>同意してSMSを送る</Button>
+                <Button style={btnstyle}
+                id={'sign-in-Button'}
+                onClick={() => this.props.smsSignIn(this.props.recaptchaVerifier, this.state.phoneNumber)}
+                disable={this.state.codeSent}>同意してSMSを送る</Button>
               </div>
             </div>
           )
@@ -80,7 +80,10 @@ class Login extends React.Component {
                     />
               </div>
               <div>
-                <Button style={btnstyle} onClick={() => this.props.confirmCode(this.props.confirmationResult, this.state.code)}>確認コードを送信</Button>
+                <Button
+                  style={btnstyle}
+                  onClick={() => this.props.confirmCode(this.props.confirmationResult, this.state.code)}
+                  >確認する</Button>
               </div>
             </div>
           )
@@ -88,7 +91,6 @@ class Login extends React.Component {
       </div>
     )
   }
-
 }
 
 export default Login
